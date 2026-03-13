@@ -14,9 +14,11 @@
     "devDependencies": {
         "@eslint/js": "^10.0.1",
         "eslint": "^10.0.3",
+        "eslint-config-prettier": "^10.1.8",
         "git-commit-msg-linter": "^5.0.8",
         "globals": "^17.4.0",
         "husky": "^8.0.3",
-        "lint-staged": "^13.2.3"
+        "lint-staged": "^13.2.3",
+        "prettier": "^3.2.5"
     }
 }
