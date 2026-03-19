@@ -1,18 +1,12 @@
 import 'dotenv/config.js';
 import express from 'express';
 
-import { PostgresHelper } from './src/db/postgres/helper.js';
-
 const app = express();
 
-app.get('/', async (req, res) => {
-    const results = await PostgresHelper.query('SELECT * FROM users;');
+app.use(express.json());
 
-    res.send(JSON.stringify(results));
-});
-
-app.listen(3000, () => {
-    const url = 'http://localhost:3000';
+app.listen(process.env.PORT, () => {
+    const url = `http://localhost:${process.env.PORT}`;
 
     console.log(`Servidor Rodando em \x1b]8;;${url}\x1b\\${url}\x1b]8;;\x1b\\`);
 });
