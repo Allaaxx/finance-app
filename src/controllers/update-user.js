@@ -6,9 +6,9 @@ import {
     checkIfIdIsValid,
     checkIfPasswordIsValid,
     emailIsAlreadyInUseResponse,
-    InvalidIdResponse,
+    invalidIdResponse,
     invalidPasswordResponse,
-} from './helpers/user.js';
+} from './helpers/index.js';
 export class UpdateUserController {
     async execute(httpRequest) {
         try {
@@ -17,7 +17,7 @@ export class UpdateUserController {
             const isIdValid = checkIfIdIsValid(userId);
 
             if (!isIdValid) {
-                return InvalidIdResponse();
+                return invalidIdResponse();
             }
 
             const params = httpRequest.body;
@@ -42,8 +42,8 @@ export class UpdateUserController {
             if (params.password) {
                 const passwordIsValid = checkIfPasswordIsValid(params.password);
 
-                if (passwordIsValid) {
-                    invalidPasswordResponse();
+                if (!passwordIsValid) {
+                    return invalidPasswordResponse();
                 }
             }
 
@@ -51,7 +51,7 @@ export class UpdateUserController {
                 const emailIsValid = checkIfEmailIsValid(params.email);
 
                 if (!emailIsValid) {
-                    emailIsAlreadyInUseResponse();
+                    return emailIsAlreadyInUseResponse();
                 }
             }
             const updateUserUseCase = new UpdateUserUseCase();

@@ -1,12 +1,14 @@
 import { EmailAlreadyInUserError } from '../errors/user.js';
 import { CreateUserUseCase } from '../use-cases/create-user.js';
-import { badRequest, created, serverError } from './helpers/http.js';
 import {
+    badRequest,
     checkIfEmailIsValid,
     checkIfPasswordIsValid,
-    EmailIsAlreadyInUseResponse,
+    created,
+    emailIsAlreadyInUseResponse,
     invalidPasswordResponse,
-} from './helpers/user.js';
+    serverError,
+} from './helpers/index.js';
 
 export class CreateUserController {
     async execute(httpRequest) {
@@ -21,21 +23,21 @@ export class CreateUserController {
             ];
 
             for (const field of requiredFields) {
-                if (!params[field] || params[field].trim().lenght === 0) {
+                if (!params[field] || params[field].trim().length === 0) {
                     return badRequest({ message: `Missing param: ${field}` });
                 }
             }
 
             const passwordIsValid = checkIfPasswordIsValid(params.password);
 
-            if (passwordIsValid) {
+            if (!passwordIsValid) {
                 return invalidPasswordResponse();
             }
 
             const emailIsValid = checkIfEmailIsValid(params.email);
 
             if (!emailIsValid) {
-                EmailIsAlreadyInUseResponse();
+                return emailIsAlreadyInUseResponse();
             }
             const createUserUseCase = new CreateUserUseCase();
 

@@ -7,19 +7,19 @@ export const invalidPasswordResponse = () => {
     });
 };
 
-export const EmailIsAlreadyInUseResponse = () => {
+export const emailIsAlreadyInUseResponse = () => {
     return badRequest({
         message: 'Invalid e-mail. Please provide a valid one.',
     });
 };
 
-export const InvalidIdResponse = () => {
-    badRequest({
+export const invalidIdResponse = () => {
+    return badRequest({
         message: 'The provided id is not valid.',
     });
 };
 
-export const checkIfPasswordIsValid = (password) => password.legnth >= 6;
+export const checkIfPasswordIsValid = (password) => password.length >= 6;
 
 export const checkIfEmailIsValid = (email) => validator.isEmail(email);
 
