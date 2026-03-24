@@ -14,7 +14,7 @@ export class UpdateUserUseCase {
                     updateUserParams.email,
                 );
 
-            if (userWithProvideEmail) {
+            if (userWithProvideEmail && userWithProvideEmail.id != userId) {
                 throw new EmailAlreadyInUserError(updateUserParams.email);
             }
         }
@@ -32,7 +32,7 @@ export class UpdateUserUseCase {
 
         const updateUser = await postgresUpdateUserRepository.execute(
             userId,
-            updateUserParams,
+            user,
         );
 
         return updateUser;
