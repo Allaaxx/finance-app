@@ -1,13 +1,26 @@
 import bcrypt from 'bcrypt';
-import { EmailAlreadyInUserError } from '../../errors/user.js';
+import {
+    EmailAlreadyInUserError,
+    UserNotFoundError,
+} from '../../errors/user.js';
 
 export class UpdateUserUseCase {
-    constructor(getUserByEmailRepository, updateUserRepository) {
+    constructor(
+        getUserByEmailRepository,
+        updateUserRepository,
+        getUserByIdRepository,
+    ) {
         this.getUserByEmailRepository = getUserByEmailRepository;
         this.updateUserRepository = updateUserRepository;
+        this.getUserByIdRepository = getUserByIdRepository;
     }
 
     async execute(userId, updateUserParams) {
+        const user = await this.getUserByIdRepository.execute(userId);
+
+        if (!user) {
+            throw new UserNotFoundError(userId);
+        }
         if (updateUserParams.email) {
             const userWithProvideEmail =
                 await this.getUserByEmailRepository.execute(
@@ -19,20 +32,23 @@ export class UpdateUserUseCase {
             }
         }
 
-        const user = {
+        const userDataToUpdate = {
             ...updateUserParams,
         };
 
         if (updateUserParams.password) {
-            const hashedPassword = await bcrypt.hash(user.password, 10);
-            user.password = hashedPassword;
+            const hashedPassword = await bcrypt.hash(
+                updateUserParams.password,
+                10,
+            );
+            userDataToUpdate.password = hashedPassword;
         }
 
-        const updateUser = await this.updateUserRepository.execute(
+        const updatedUser = await this.updateUserRepository.execute(
             userId,
-            user,
+            userDataToUpdate,
         );
 
-        return updateUser;
+        return updatedUser;
     }
 }

@@ -1,4 +1,7 @@
-import { EmailAlreadyInUserError } from '../../errors/user.js';
+import {
+    EmailAlreadyInUserError,
+    UserNotFoundError,
+} from '../../errors/user.js';
 import { badRequest, ok, serverError } from '../helpers/http.js';
 import {
     checkIfEmailIsValid,
@@ -7,6 +10,7 @@ import {
     emailIsAlreadyInUseResponse,
     invalidIdResponse,
     invalidPasswordResponse,
+    userNotFoundResponse,
 } from '../helpers/index.js';
 export class UpdateUserController {
     constructor(updateUserUseCase) {
@@ -66,6 +70,9 @@ export class UpdateUserController {
         } catch (error) {
             if (error instanceof EmailAlreadyInUserError) {
                 return badRequest({ message: error.message });
+            }
+            if (error instanceof UserNotFoundError) {
+                return userNotFoundResponse();
             }
             console.error(error);
             return serverError();
