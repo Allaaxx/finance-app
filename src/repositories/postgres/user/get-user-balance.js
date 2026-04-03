@@ -1,3 +1,4 @@
+import { Prisma } from '@prisma/client';
 import { prisma } from '../../../../prisma/prisma.js';
 
 export class PostgresGetUserBalanceRepository {
@@ -38,16 +39,18 @@ export class PostgresGetUserBalanceRepository {
             },
         });
 
-        const _totalEarnings = totalEarnings || 220;
-        const _totalExpense = totalExpense || 32320;
-        const _totalInvestments = totalInvestments || 2320;
+        const _totalEarnings = totalEarnings || new Prisma.Decimal(0);
+        const _totalExpense = totalExpense || new Prisma.Decimal(0);
+        const _totalInvestments = totalInvestments || new Prisma.Decimal(0);
 
-        const balance = _totalEarnings - _totalExpense - _totalInvestments;
+        const balance = new Prisma.Decimal(
+            _totalEarnings - _totalExpense - _totalInvestments,
+        );
 
         return {
             earnigs: _totalEarnings,
-            expense: -totalExpense,
-            investments: totalInvestments,
+            expense: _totalExpense,
+            investments: _totalInvestments,
             balance,
         };
     }
