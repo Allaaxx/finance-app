@@ -1,4 +1,4 @@
-import { EmailAlreadyInUserError } from '../../errors/user.js';
+import { EmailAlreadyInUseError } from '../../errors/user.js';
 import { createUserSchema } from '../../schemas/index.js';
 import { badRequest, created, serverError } from '../helpers/index.js';
 
@@ -22,7 +22,7 @@ export class CreateUserController {
                     message: error.issues[0].message,
                 });
             }
-            if (error instanceof EmailAlreadyInUserError) {
+            if (error instanceof EmailAlreadyInUseError) {
                 return badRequest({ message: error.message });
             }
             console.log(error);

@@ -1,5 +1,5 @@
 import { faker } from '@faker-js/faker';
-import { EmailAlreadyInUserError } from '../../errors/user.js';
+import { EmailAlreadyInUseError } from '../../errors/user.js';
 import { CreateUserController } from './create-user.js';
 describe('Create User Controller', () => {
     class CreateUserUseCaseStub {
@@ -137,7 +137,7 @@ describe('Create User Controller', () => {
         const { createUserUseCase, sut } = makeSut();
 
         jest.spyOn(createUserUseCase, 'execute').mockRejectedValueOnce(
-            new EmailAlreadyInUserError(httpRequest.body.email),
+            new EmailAlreadyInUseError(httpRequest.body.email),
         );
 
         const result = await sut.execute(httpRequest);

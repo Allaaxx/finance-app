@@ -1,6 +1,6 @@
 import bcrypt from 'bcrypt';
 import {
-    EmailAlreadyInUserError,
+    EmailAlreadyInUseError,
     UserNotFoundError,
 } from '../../errors/user.js';
 
@@ -28,7 +28,7 @@ export class UpdateUserUseCase {
                 );
 
             if (userWithProvideEmail && userWithProvideEmail.id != userId) {
-                throw new EmailAlreadyInUserError(updateUserParams.email);
+                throw new EmailAlreadyInUseError(updateUserParams.email);
             }
         }
 
