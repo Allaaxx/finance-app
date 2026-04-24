@@ -33,4 +33,18 @@ describe('Create Transaction Controller', () => {
 
         expect(response.statusCode).toBe(201);
     });
+
+    it('should return 400 when missing user_id', async () => {
+        const { sut } = makeSut();
+
+        const response = await sut.execute({
+            ...baseHttpRequest,
+            body: {
+                ...baseHttpRequest,
+                user_id: undefined,
+            },
+        });
+
+        expect(response.statusCode).toBe(400);
+    });
 });
