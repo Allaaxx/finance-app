@@ -38,7 +38,6 @@ describe('Create Transaction Controller', () => {
         const { sut } = makeSut();
 
         const response = await sut.execute({
-            ...baseHttpRequest,
             body: {
                 ...baseHttpRequest,
                 user_id: undefined,
@@ -52,7 +51,6 @@ describe('Create Transaction Controller', () => {
         const { sut } = makeSut();
 
         const response = await sut.execute({
-            ...baseHttpRequest,
             body: {
                 ...baseHttpRequest,
                 name: undefined,
@@ -66,7 +64,6 @@ describe('Create Transaction Controller', () => {
         const { sut } = makeSut();
 
         const response = await sut.execute({
-            ...baseHttpRequest,
             body: {
                 ...baseHttpRequest,
                 type: undefined,
@@ -80,10 +77,22 @@ describe('Create Transaction Controller', () => {
         const { sut } = makeSut();
 
         const response = await sut.execute({
-            ...baseHttpRequest,
             body: {
                 ...baseHttpRequest,
                 amount: undefined,
+            },
+        });
+
+        expect(response.statusCode).toBe(400);
+    });
+
+    it('should return 400 when date is invalid', async () => {
+        const { sut } = makeSut();
+
+        const response = await sut.execute({
+            body: {
+                ...baseHttpRequest,
+                date: 'invalid_date',
             },
         });
 
