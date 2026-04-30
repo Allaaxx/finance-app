@@ -1,7 +1,7 @@
 import { faker } from '@faker-js/faker';
 import { GetTransactionsByUserIdController } from './get-transactions-by-user-id.js';
 describe('Get Transaction By User ID Controller ', () => {
-    class GetUserByIdUseCaseStub {
+    class GetTransactionsByUserIdUseCaseStub {
         execute() {
             return {
                 user_id: faker.string.uuid(),
@@ -15,10 +15,13 @@ describe('Get Transaction By User ID Controller ', () => {
     }
 
     const makeSut = () => {
-        const getUserByIdUseCase = new GetUserByIdUseCaseStub();
-        const sut = new GetTransactionsByUserIdController();
+        const getTransactionsByUserIdUseCase =
+            new GetTransactionsByUserIdUseCaseStub();
+        const sut = new GetTransactionsByUserIdController(
+            getTransactionsByUserIdUseCase,
+        );
 
-        return { sut, getUserByIdUseCase };
+        return { sut, getTransactionsByUserIdUseCase };
     };
 
     it('should return 200 when finding transaction by user id successfully', async () => {
@@ -29,5 +32,15 @@ describe('Get Transaction By User ID Controller ', () => {
         });
 
         expect(response.statusCode).toBe(200);
+    });
+
+    it('should return 400 when missing userId param', async () => {
+        const { sut } = makeSut();
+
+        const response = await sut.execute({
+            query: { userId: undefined },
+        });
+
+        expect(response.statusCode).toBe(400);
     });
 });
