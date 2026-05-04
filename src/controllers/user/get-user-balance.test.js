@@ -1,4 +1,5 @@
 import { faker } from '@faker-js/faker';
+import { UserNotFoundError } from '../../errors/user';
 import { GetUserBalanceController } from './get-user-balance';
 
 describe('GetUserBalanceController', () => {
@@ -59,5 +60,16 @@ describe('GetUserBalanceController', () => {
         await sut.execute(httpRequest);
 
         expect(executeSpy).toHaveBeenCalledWith(httpRequest.params.userId);
+    });
+
+    it('should return 404 if GetUserBalanceUseCase throws with UserNotFoundError', async () => {
+        const { sut, getUserBalanceUseCase } = makeSut();
+        jest.spyOn(getUserBalanceUseCase, 'execute').mockRejectedValueOnce(
+            new UserNotFoundError(faker.string.uuid()),
+        );
+
+        const response = await sut.execute(httpRequest);
+
+        expect(response.statusCode).toBe(404);
     });
 });
