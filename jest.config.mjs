@@ -14,6 +14,7 @@ const config = {
         '^.+\\.[cm]?js$': 'babel-jest',
     },
     transformIgnorePatterns: ['/node_modules/(?!@faker-js/faker/)'],
+    collectCoverageFrom: ['src/**/*.js'],
 };
 
 export default config;
