@@ -2,7 +2,7 @@ import { faker } from '@faker-js/faker';
 import { EmailAlreadyInUseError, UserNotFoundError } from '../../errors/user';
 import { UpdateUserController } from './update-user.js';
 
-describe('UpdateUserController', () => {
+describe('Update User Controller', () => {
     class UpdateUserUseCaseStub {
         async execute(user) {
             return user;

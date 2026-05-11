@@ -2,7 +2,7 @@ import { faker } from '@faker-js/faker';
 import { UserNotFoundError } from '../../errors/user';
 import { GetUserBalanceController } from './get-user-balance';
 
-describe('GetUserBalanceController', () => {
+describe('Get User Balance Controller', () => {
     class getUserBalanceUseCaseStub {
         async execute() {
             return faker.number.int();

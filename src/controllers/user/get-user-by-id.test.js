@@ -1,6 +1,6 @@
 const { faker } = require('@faker-js/faker');
 import { GetUserByIdController } from './get-user-by-id.js';
-describe('GetUserByIdController', () => {
+describe('Get User By Id Controller', () => {
     class GetUserByIdUseCaseStub {
         async execute() {
             return {
