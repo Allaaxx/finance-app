@@ -36,24 +36,24 @@ describe('Create User Use Case', () => {
     };
 
     const makeSut = () => {
-        const getUserByEmailRepositoryStub = new GetUserByEmailRepositoryStub();
-        const createUserRepositoryStub = new CreateUserRepositoryStub();
-        const passwordHaserAdapterStub = new PasswordHaserAdapterStub();
-        const idGeneratorAdapterStub = new IdGeneratorAdapterStub();
+        const getUserByEmailRepository = new GetUserByEmailRepositoryStub();
+        const createUserRepository = new CreateUserRepositoryStub();
+        const passwordHasherAdapter = new PasswordHaserAdapterStub();
+        const idGeneratorAdapter = new IdGeneratorAdapterStub();
 
         const sut = new CreateUserUseCase(
-            getUserByEmailRepositoryStub,
-            createUserRepositoryStub,
-            passwordHaserAdapterStub,
-            idGeneratorAdapterStub,
+            getUserByEmailRepository,
+            createUserRepository,
+            passwordHasherAdapter,
+            idGeneratorAdapter,
         );
 
         return {
             sut,
-            getUserByEmailRepositoryStub,
-            createUserRepositoryStub,
-            passwordHaserAdapterStub,
-            idGeneratorAdapterStub,
+            getUserByEmailRepository,
+            createUserRepository,
+            passwordHasherAdapter,
+            idGeneratorAdapter,
         };
     };
 
@@ -66,8 +66,8 @@ describe('Create User Use Case', () => {
     });
 
     it('should throw an EmailAlreadyInUseError if GetUserByEmailRepository returns a user', async () => {
-        const { sut, getUserByEmailRepositoryStub } = makeSut();
-        jest.spyOn(getUserByEmailRepositoryStub, 'execute').mockReturnValueOnce(
+        const { sut, getUserByEmailRepository } = makeSut();
+        jest.spyOn(getUserByEmailRepository, 'execute').mockReturnValueOnce(
             user,
         );
 
