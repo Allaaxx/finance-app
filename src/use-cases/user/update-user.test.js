@@ -57,4 +57,14 @@ describe('Update User Use Case', () => {
 
         expect(result).toBe(user);
     });
+
+    it('should update user successfully (with email)', async () => {
+        const { sut } = makeSut();
+
+        const result = await sut.execute(faker.string.uuid(), {
+            email: faker.internet.email(),
+        });
+
+        expect(result).toBe(user);
+    });
 });
