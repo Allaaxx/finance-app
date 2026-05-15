@@ -46,9 +46,9 @@ describe('Get User Balance Use Case', () => {
     it('should get user balance successfully', async () => {
         const { sut } = makeSut();
 
-        const promise = await sut.execute(faker.string.uuid());
+        const result = await sut.execute(faker.string.uuid());
 
-        expect(promise).toEqual(userBalance);
+        expect(result).toEqual(userBalance);
     });
 
     it('should throw UserNotFoundError if GetUserByIdRepository returns null', async () => {
