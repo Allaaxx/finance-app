@@ -40,4 +40,17 @@ describe('Delte Transaction Use Case', () => {
             id,
         });
     });
+
+    it('should call DeleteTransactionRepository with correct params', async () => {
+        const { sut, deleteTransactionRepository } = makeSut();
+        const deleteTransactionRepositorySpy = jest.spyOn(
+            deleteTransactionRepository,
+            'execute',
+        );
+        const id = faker.string.uuid();
+
+        await sut.execute(id);
+
+        expect(deleteTransactionRepositorySpy).toHaveBeenCalledWith(id);
+    });
 });
