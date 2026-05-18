@@ -9,7 +9,7 @@ describe('Create Transaction Use Case', () => {
     };
 
     class CreateTransactionRepositoryStub {
-        async execute(transaction) {
+        async execute() {
             return transaction;
         }
     }
@@ -50,7 +50,7 @@ describe('Create Transaction Use Case', () => {
 
         const result = await sut.execute(CreateTransactionParams);
 
-        expect(result).toEqual({ ...CreateTransactionParams, id: 'random_id' });
+        expect(result).toEqual(transaction);
     });
 
     it('should call GetUserByIdRepository with correct params', async () => {
