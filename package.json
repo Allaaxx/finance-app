@@ -7,7 +7,7 @@
     "scripts": {
         "test": "dotenv -e .env.test -- jest --passWithNoTests --silent",
         "test:coverage": "npm run test -- --coverage",
-        "test:watch": "npm run test --  --watch",
+        "test:watch": "npm run test --  --watch  --detectOpenHandles",
         "postinstall": "husky install && prisma generate",
         "migrations": "node ./src/db/postgres/migrations/exec.js",
         "start:dev": "node --watch index.js"
