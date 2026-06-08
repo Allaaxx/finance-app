@@ -7,6 +7,7 @@ const config = {
     modulePathIgnorePatterns: ['<rootDir>/.postgres/'],
     testPathIgnorePatterns: ['<rootDir>/.postgres/'],
     watchPathIgnorePatterns: ['<rootDir>/.postgres/'],
+    roots: ['<rootDir>/src'],
     transform: {
         '^.+\\.[cm]?js$': 'babel-jest',
     },
