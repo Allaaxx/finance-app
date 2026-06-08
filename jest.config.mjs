@@ -13,6 +13,7 @@ const config = {
     },
     transformIgnorePatterns: ['/node_modules/(?!@faker-js/faker/)'],
     collectCoverageFrom: ['src/**/*.js'],
+    globalSetup: '<rootDir>/jest.global-setup.js',
 };
 
 export default config;
