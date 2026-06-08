@@ -1,16 +1,12 @@
 import 'dotenv/config';
-/**
- * For a detailed explanation regarding each configuration property, visit:
- * https://jestjs.io/docs/configuration
- */
 
 /** @type {import('jest').Config} */
 const config = {
     coverageDirectory: 'coverage',
     coverageProvider: 'v8',
-    modulePathIgnorePatterns: ['<rootDir>/.postgres-data/'],
-    testPathIgnorePatterns: ['<rootDir>/.postgres-data/'],
-    watchPathIgnorePatterns: ['<rootDir>/.postgres-data/'],
+    modulePathIgnorePatterns: ['<rootDir>/.postgres/'],
+    testPathIgnorePatterns: ['<rootDir>/.postgres/'],
+    watchPathIgnorePatterns: ['<rootDir>/.postgres/'],
     transform: {
         '^.+\\.[cm]?js$': 'babel-jest',
     },
