@@ -3,7 +3,7 @@ import { user as fixtureUser } from '../../tests';
 import { CreateUserUseCase } from './create-user.js';
 describe('Create User Use Case', () => {
     const user = {
-        fixtureUser,
+        ...fixtureUser,
         id: undefined,
     };
     class GetUserByEmailRepositoryStub {
