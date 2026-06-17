@@ -5,7 +5,7 @@
     "main": "index.js",
     "type": "module",
     "scripts": {
-        "test": "dotenv -e .env.test -- jest --passWithNoTests --silent",
+        "test": "dotenv -e .env.test -- jest --passWithNoTests --silent --runInBand",
         "test:coverage": "npm run test -- --coverage",
         "test:watch": "npm run test --  --watch  --detectOpenHandles",
         "postinstall": "husky install && prisma generate",
