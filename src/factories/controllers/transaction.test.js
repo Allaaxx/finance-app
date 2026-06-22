@@ -31,4 +31,9 @@ describe('Transaction Controller Factory', () => {
         );
     });
 
+    it('should return a valid DeleteTransactionController instance', () => {
+        expect(makeDeleteTransactionController()).toBeInstanceOf(
+            DeleteTransactionController,
+        );
+    });
 });
