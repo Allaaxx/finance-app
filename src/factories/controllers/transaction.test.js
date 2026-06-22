@@ -25,4 +25,10 @@ describe('Transaction Controller Factory', () => {
         );
     });
 
+    it('should return a valid GetTransactionsByUserIdController instance', () => {
+        expect(makeGetTransactionsByUserIdController()).toBeInstanceOf(
+            GetTransactionsByUserIdController,
+        );
+    });
+
 });
