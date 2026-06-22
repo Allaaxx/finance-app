@@ -80,4 +80,17 @@ describe('Delete Transaction Controller', () => {
 
         expect(executeSpy).toHaveBeenCalledWith(transactionId);
     });
+
+    it('should return 404 when use case returns null', async () => {
+        const { sut, deleteTransactionUseCase } = makeSut();
+        jest.spyOn(deleteTransactionUseCase, 'execute').mockResolvedValueOnce(null);
+
+        const response = await sut.execute({
+            params: {
+                transactionId: faker.string.uuid(),
+            },
+        });
+
+        expect(response.statusCode).toBe(404);
+    });
 });
