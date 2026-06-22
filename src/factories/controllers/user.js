@@ -57,7 +57,7 @@ export const makeCreateUserController = () => {
 };
 
 export const makeUpdateUserController = () => {
-    const getUserByEmailRepository = new PostgresgetUserByEmailRepository();
+    const getUserByEmailRepository = new PostgresGetUserByEmailRepository();
 
     const updateUserRepository = new PostgresUpdateUserRepository();
 
