@@ -13,7 +13,7 @@ import {
     PostgresCreateUserRepository,
     PostgresDeleteUserRepository,
     PostgresGetUserBalanceRepository,
-    PostgresgetUserByEmailRepository,
+    PostgresGetUserByEmailRepository,
     PostgresGetUserByIdRepository,
     PostgresUpdateUserRepository,
 } from '../../repositories/postgres/index.js';
@@ -36,7 +36,7 @@ export const makeGetUserByIdController = () => {
 };
 
 export const makeCreateUserController = () => {
-    const getUserByEmailRepository = new PostgresgetUserByEmailRepository();
+    const getUserByEmailRepository = new PostgresGetUserByEmailRepository();
 
     const createUserRepository = new PostgresCreateUserRepository();
 
