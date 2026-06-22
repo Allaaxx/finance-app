@@ -4,7 +4,7 @@ import 'dotenv/config';
 const config = {
     coverageDirectory: 'coverage',
     coverageProvider: 'v8',
-    transformIgnorePatterns: ['/node_modules/(?!@faker-js/faker/)'],
+    transformIgnorePatterns: ['/node_modules/(?!(@faker-js/faker|uuid)/)'],
     collectCoverageFrom: ['src/**/*.js'],
     globalSetup: '<rootDir>/jest.global-setup.js',
     setupFilesAfterEnv: ['<rootDir>/jest.setup-after-env.js'],
