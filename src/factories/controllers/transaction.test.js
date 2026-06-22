@@ -1,5 +1,15 @@
-import { CreateTransactionController } from '../../controllers';
-import { makeCreateTransactionController } from './transaction';
+import {
+    CreateTransactionController,
+    DeleteTransactionController,
+    GetTransactionsByUserIdController,
+    UpdateTransactionController,
+} from '../../controllers';
+import {
+    makeCreateTransactionController,
+    makeDeleteTransactionController,
+    makeGetTransactionsByUserIdController,
+    makeUpdateTransactionController,
+} from './transaction';
 
 describe('Transaction Controller Factory', () => {
     it('should return a valid CreateTransactionController instance', () => {
@@ -7,4 +17,12 @@ describe('Transaction Controller Factory', () => {
             CreateTransactionController,
         );
     });
+
+
+    it('should return a valid UpdateTransactionController instance', () => {
+        expect(makeUpdateTransactionController()).toBeInstanceOf(
+            UpdateTransactionController,
+        );
+    });
+
 });
