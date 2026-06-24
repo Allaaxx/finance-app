@@ -1,11 +1,13 @@
 import { ZodError } from 'zod';
 import { updatedTransactionSchema } from '../../schemas/transaction.js';
+import { TransactionNotFoundError } from '../../errors/transaction.js';
 import {
     badRequest,
     checkIfIdIsValid,
     invalidIdResponse,
     ok,
     serverError,
+    transactionNotFoundResponse,
 } from '../helpers/index.js';
 export class UpdateTransactionController {
     constructor(updateTransactionUseCase) {
@@ -36,6 +38,9 @@ export class UpdateTransactionController {
                 return badRequest({
                     message: error.issues[0].message,
                 });
+            }
+            if (error instanceof TransactionNotFoundError) {
+                return transactionNotFoundResponse();
             }
             console.error(error);
             return serverError();
