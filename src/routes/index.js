@@ -1,2 +1,2 @@
 export * from './users.js'
-export * from './transaction.js'
+export * from './transactions.js'
