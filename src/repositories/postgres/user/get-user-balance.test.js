@@ -57,8 +57,8 @@ describe('Get User Balance Repository', () => {
 
         const result = await sut.execute(fakeUser.id);
 
-        expect(result.earnigs.toString()).toBe('10000');
-        expect(result.expense.toString()).toBe('2000');
+        expect(result.earnings.toString()).toBe('10000');
+        expect(result.expenses.toString()).toBe('2000');
         expect(result.investments.toString()).toBe('6000');
         expect(result.balance.toString()).toBe('2000');
     });

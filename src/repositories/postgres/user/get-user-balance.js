@@ -48,8 +48,8 @@ export class PostgresGetUserBalanceRepository {
         );
 
         return {
-            earnigs: _totalEarnings,
-            expense: _totalExpense,
+            earnings: _totalEarnings,
+            expenses: _totalExpense,
             investments: _totalInvestments,
             balance,
         };
