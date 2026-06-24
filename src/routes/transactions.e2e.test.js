@@ -99,4 +99,15 @@ describe('Transaction Routes E2E Tests', () => {
         expect(response.status).toBe(200)
         expect(response.body.id).toEqual(createdTransaction.id)
     })
+
+    it('PATCH /api/transactions/:transactionId should return 404 when transaction is not found', async () => {
+        const response = await request(app)
+            .patch(`/api/transactions/${transaction.id}`)
+            .send({
+                amount: 100,
+                type: TransactionType.INVESTMENT,
+            })
+
+        expect(response.status).toBe(404)
+    })
 })
