@@ -121,6 +121,17 @@ describe('Update User Controller', () => {
         expect(response.statusCode).toBe(400);
     });
 
+    it('should return 404 if UpdateUserUseCase throws UserNotFoundError', async () => {
+        const { sut, updateUserUseCase } = makeSut();
+        jest.spyOn(updateUserUseCase, 'execute').mockRejectedValueOnce(
+            new UserNotFoundError(faker.string.uuid()),
+        );
+
+        const response = await sut.execute(httpRequest);
+
+        expect(response.statusCode).toBe(404);
+    });
+
     it('should call UpdateUserUseCase with correct values', async () => {
         const { sut, updateUserUseCase } = makeSut();
         const executeSpy = jest.spyOn(updateUserUseCase, 'execute');
