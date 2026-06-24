@@ -116,4 +116,10 @@ describe('Transaction Routes E2E Tests', () => {
 
         expect(response.status).toBe(404)
     })
+
+    it('GET /api/transactions/:userId should return 404 when fetching for non-existing user', async () => {
+        const response = await request(app).get(`/api/transactions/${user.id}`)
+
+        expect(response.status).toBe(404)
+    })
 })
