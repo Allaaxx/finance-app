@@ -159,4 +159,29 @@ describe('Users Routes E2E Tests', () => {
 
         expect(response.status).toBe(400)
     })
+
+    it('PATCH /api/users/:userId should return 400 when email already in use', async () => {
+        const { body: createdUserOne } = await request(app)
+            .post(`/api/users`)
+            .send({
+                ...user,
+                id: undefined,
+                email: faker.internet.email(),
+            })
+
+        const { body: createdUserTwo } = await request(app)
+            .post(`/api/users`)
+            .send({
+                ...user,
+                id: undefined,
+                email: faker.internet.email(),
+            })
+
+        const response = await request(app)
+            .patch(`/api/users/${createdUserOne.id}`)
+            .send({
+                email: createdUserTwo.email,
+            })
+        expect(response.status).toBe(400)
+    })
 })
