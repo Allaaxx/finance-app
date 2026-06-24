@@ -184,4 +184,25 @@ describe('Users Routes E2E Tests', () => {
             })
         expect(response.status).toBe(400)
     })
+
+    it('PATCH /api/users/:userId should return 400 when body is invalid', async () => {
+        const { body: createdUser } = await request(app)
+            .post(`/api/users`)
+            .send({
+                ...user,
+                id: undefined,
+            })
+
+        const response = await request(app)
+            .patch(`/api/users/${createdUser.id}`)
+            .send({
+                first_name: faker.person.firstName(),
+                last_name: faker.person.lastName(),
+                email: faker.internet.email(),
+                password: faker.internet.password(),
+                phone: faker.phone.number()
+            })
+
+        expect(response.status).toBe(400)
+    })
 })
